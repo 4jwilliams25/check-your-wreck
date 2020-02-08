@@ -6,7 +6,7 @@ export default function RearEndForm(props) {
     let hitOrPushed = (
         <div>
             <div>Did you hit the car in front of you first or were you pushed?</div>
-                <select onChange={e => props.setPushed(e.target.value)}>
+                <select required onChange={e => props.setPushed(e.target.value)}>
                     <option value=""></option>
                     <option value="rearEnded">
                         I hit the car in front, then was rear ended
@@ -22,7 +22,7 @@ export default function RearEndForm(props) {
         <div>
 
             <div>How many cars were there?</div>
-            <select onChange={e => props.setNumberOfCars(e.target.value)}>
+            <select required onChange={e => props.setNumberOfCars(e.target.value)}>
                 <option value=""></option>
                 <option value="2">Two cars</option>
                 <option value=">2">More than two cars</option>
@@ -31,7 +31,7 @@ export default function RearEndForm(props) {
             <br />
 
             <div>Where was your car?</div>
-            <select onChange={e => props.setCarPosition(e.target.value)}>
+            <select required onChange={e => props.setCarPosition(e.target.value)}>
                 <option value=""></option>
                 <option value="front">The front car</option>
                 <option value="back">The back car</option>

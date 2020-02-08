@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AccidentForm from './Components/AccidentForm';
+import AccidentForm from './Components/Forms/AccidentForm'
 
 function App() {
   return (
