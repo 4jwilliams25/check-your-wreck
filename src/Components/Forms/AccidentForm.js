@@ -5,6 +5,11 @@ import RearEndForm from './RearEndForm';
 import LaneChangeForm from './LaneChangeForm';
 import BackingForm from './BackingForm';
 
+// Function Imports
+import rearEndFault from './FaultFunctions/rearEndFault';
+import laneChangeFault from './FaultFunctions/laneChangeFault';
+import backingFault from './FaultFunctions/backingFault';
+
 export default function AccidentForm() {
 
     // Form State
@@ -82,166 +87,33 @@ export default function AccidentForm() {
         />
     )
 
-    // Fault determination functions
-    const rearEndFault = () => {
-        if (numberOfCars === "2" && carPosition === "back") {
-            return "You're at fault!"
-        } else if (numberOfCars === ">2" && carPosition === "back") {
-            return "You're at fault!"
-        } else if (numberOfCars === ">2" && carPosition === "middle" && pushed === "rearEnded") {
-            return "You're at fault, but only for damage you caused to the car in front of you!"
-        } else {
-            return "You're not at fault!"
-        }
-    }
-
-    const laneChangeFault = () => {
-        if (
-            ivAction === "straight" &&
-            cvAction === "changing" && (
-            cvPoi === "leftRearCorner" ||
-            cvPoi === "rightRearCorner"
-        )) {
-            return "You may have a little fault"
-        } else if (
-            ivAction === "changing" &&
-            cvAction === "straight" && (
-            ivPoi === "leftRearCorner" ||
-            ivPoi === "rightRearCorner"
-        )) {
-          return "You're at fault, or at least mostly at fault!"  
-        } else if (
-            ivAction === "changing" &&
-            cvAction === "straight" && (
-            cvPoi === "leftSide" ||
-            cvPoi === "leftQuarter" ||
-            cvPoi === "rightSide" ||
-            cvPoi === "rightQuarter"
-        )) {
-          return "You are super at fault! Like really really at fault! Like what are you even doing on the road?!"  
-        } else if (
-            ivAction === "changing" &&
-            cvAction === "straight"
-           ) {
-          return "You're at fault!"  
-        } else if (
-            ivAction === "changing" &&
-            cvAction === "changing"
-           ) {
-          return "You're both at fault!"  
-        } else if (
-            sawOtherCar === "yes" &&
-            evasiveAction === "no"
-        ) {
-            return "You may have a little fault"
-        } else {
-            return "You're not at fault!"
-        }
-    }
-
-    const backingFault = () => {
-        if (
-            cvStoppedOrMoving === "stopped" &&
-            sawOtherCar === "no"
-        ) {
-            return "You are probably at fault or majority at fault!"
-        } else if (
-            ivAction === "backing" && (
-            cvAction === "forward" ||
-            cvAction === "unknown"
-        ) && (
-            ivDistanceOut === "half" ||
-            ivDistanceOut === "3quarters" ||
-            ivDistanceOut === "fully"
-        ) && (
-            ivPoi === "leftSide" ||
-            ivPoi === "rightSide" ||
-            ivPoi === "leftQuarter" ||
-            ivPoi === "rightQuarter"
-        ) && (
-            cvPoi === "frontBumper" ||
-            cvPoi === "leftFrontCorner" ||
-            cvPoi === "rightFrontCorner"
-        )) {
-            return "You may be partially at fault"
-        } else if (
-            ivAction === "backing" && (
-            cvAction === "forward" ||
-            cvAction === "unknown"
-            ) && (
-            ivPoi === "rearBumper" ||
-            ivPoi === "leftRearCorner" ||
-            ivPoi === "rightRearCorner"
-        ) && (
-            cvPoi === "frontBumper" ||
-            cvPoi === "leftFrontCorner" ||
-            cvPoi === "rightFrontCorner" ||
-            cvPoi === "rightFender" ||
-            cvPoi === "leftFender"   
-        )) {
-            return "You're at fault!"
-        } else if (
-            ivAction === "backing" && (
-            cvAction === "forward" ||
-            cvAction === "unknown"
-            ) && (
-            ivPoi === "rearBumper" ||
-            ivPoi === "leftRearCorner" ||
-            ivPoi === "rightRearCorner"
-        ) && (
-            cvPoi === "leftSide" ||
-            cvPoi === "rightSide" ||
-            cvPoi === "leftQuarter" ||
-            cvPoi === "rightQuarter" ||
-            cvPoi === "leftRearCorner" ||
-            cvPoi === "rightRearCorner"   
-        )) {
-            return "You're super at fault!"
-        } else if (
-            ivAction === "backing" && (
-            cvAction === "backing"
-            ) && (
-            ivPoi === "rearBumper" ||
-            ivPoi === "leftRearCorner" ||
-            ivPoi === "rightRearCorner"
-        ) && (
-            cvPoi === "leftFender" ||
-            cvPoi === "rightFender" ||
-            cvPoi === "leftSide" ||
-            cvPoi === "rightSide" ||
-            cvPoi === "leftQuarter" ||
-            cvPoi === "rightQuarter" 
-        )) {
-            return "You're probably at fault or majority at fault!"
-        } else if (
-            ivAction === "backing" &&
-            cvAction === "forward"
-        ) {
-            return "You're at fault!"
-        } else if (
-            ivAction === "backing" &&
-            cvAction === "backing"
-        ) {
-            return "You're both probably at fault!"
-        } else if (
-            sawOtherCar === "yes" &&
-            evasiveAction === "no"
-        ) {
-            return "You may have some fault!"
-        } else {
-            return "You're not at fault!"
-        }
-    }
-
     // Submit Handler
     const handleSubmit = e => {
         e.preventDefault();
         if (accidentType === "rearEnd") {
-            setFault(rearEndFault())
+            setFault(rearEndFault(
+                numberOfCars,
+                carPosition,
+                pushed))
         } else if (accidentType === "laneChange") {
-            setFault(laneChangeFault())
+            setFault(laneChangeFault(
+                ivAction, 
+                cvAction, 
+                ivPoi, 
+                cvPoi, 
+                sawOtherCar, 
+                evasiveAction))
         } else if (accidentType === "backing") {
-            setFault(backingFault())
+            setFault(backingFault(
+                cvStoppedOrMoving,
+                sawOtherCar,
+                ivAction,
+                cvAction,
+                ivDistanceOut,
+                ivPoi,
+                cvPoi,
+                evasiveAction
+            ))
         }
     }
 
