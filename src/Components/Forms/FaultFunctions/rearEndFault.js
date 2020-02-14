@@ -1,11 +1,15 @@
 export default (numberOfCars, carPosition, pushed) => {
     if (numberOfCars === "2" && carPosition === "back") {
-        return "You're at fault!"
+        return 1
     } else if (numberOfCars === ">2" && carPosition === "back") {
-        return "You're at fault!"
+        return 2
     } else if (numberOfCars === ">2" && carPosition === "middle" && pushed === "rearEnded") {
-        return "You're at fault, but only for damage you caused to the car in front of you!"
+        return 3
+    } else if (numberOfCars === ">2" && carPosition === "middle" && pushed ==="pushed") {
+        return 4
+    } else if (numberOfCars === ">2" && carPosition === "front") {
+        return 5
     } else {
-        return "You're not at fault!"
+        return 6
     }
 }

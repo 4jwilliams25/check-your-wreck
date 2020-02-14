@@ -1,4 +1,5 @@
 import React from "react";
+import { responses } from './AccidentCodes/CodeResponses';
 
 // Component Imports
 import RearEndForm from './RearEndForm';
@@ -21,7 +22,8 @@ export default function AccidentForm() {
     const [evasiveAction, setEvasiveAction] = React.useState("");
     const [cvAction, setCvAction] = React.useState("");
     const [ivPoi, setIvPoi] = React.useState("");
-    const [cvPoi, setCvPoi] = React.useState("")
+    const [cvPoi, setCvPoi] = React.useState("");
+    const [accidentCode, setAccidentCode] = React.useState(0)
     // Rear End Accident State
     const [numberOfCars, setNumberOfCars] = React.useState("");
     const [carPosition, setCarPosition] = React.useState("");
@@ -91,7 +93,7 @@ export default function AccidentForm() {
     const handleSubmit = e => {
         e.preventDefault();
         if (accidentType === "rearEnd") {
-            setFault(rearEndFault(
+            setAccidentCode(rearEndFault(
                 numberOfCars,
                 carPosition,
                 pushed))
@@ -136,7 +138,8 @@ export default function AccidentForm() {
                 <button>So who's fault is this?</button>
             </div>
             <br />
-            <h1>{fault}</h1>
+            <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
+            <h3>{accidentCode ? responses[accidentCode][1] : ''}</h3>
         </form>
     )
 }
