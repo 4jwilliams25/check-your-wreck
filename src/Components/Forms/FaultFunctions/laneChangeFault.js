@@ -5,14 +5,14 @@ export default (ivAction, cvAction, ivPoi, cvPoi, sawOtherCar, evasiveAction) =>
         cvPoi === "leftRearCorner" ||
         cvPoi === "rightRearCorner"
     )) {
-        return "You may have a little fault"
+        return 7
     } else if (
         ivAction === "changing" &&
         cvAction === "straight" && (
         ivPoi === "leftRearCorner" ||
         ivPoi === "rightRearCorner"
     )) {
-      return "You're at fault, or at least mostly at fault!"  
+      return 8  
     } else if (
         ivAction === "changing" &&
         cvAction === "straight" && (
@@ -21,23 +21,35 @@ export default (ivAction, cvAction, ivPoi, cvPoi, sawOtherCar, evasiveAction) =>
         cvPoi === "rightSide" ||
         cvPoi === "rightQuarter"
     )) {
-      return "You are super at fault! Like really really at fault! Like what are you even doing on the road?!"  
+      return 9 
+    } else if (
+        ivAction === "straight" &&
+        cvAction === "changing" && (
+        evasiveAction === "yes" ||
+        !evasiveAction
+        ) && (
+        ivPoi === "leftSide" ||
+        ivPoi === "leftQuarter" ||
+        ivPoi === "rightSide" ||
+        ivPoi === "rightQuarter"
+    )) {
+      return 10 
     } else if (
         ivAction === "changing" &&
         cvAction === "straight"
        ) {
-      return "You're at fault!"  
+      return 11  
     } else if (
         ivAction === "changing" &&
         cvAction === "changing"
        ) {
-      return "You're both at fault!"  
+      return 12  
     } else if (
         sawOtherCar === "yes" &&
         evasiveAction === "no"
     ) {
-        return "You may have a little fault"
+        return 13
     } else {
-        return "You're not at fault!"
+        return 14
     }
 }

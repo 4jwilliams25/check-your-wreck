@@ -4,6 +4,7 @@ export default (
     ivAction, 
     cvAction, 
     ivDistanceOut,
+    cvDistanceOut,
     ivPoi,
     cvPoi,
     evasiveAction
@@ -12,7 +13,7 @@ export default (
         cvStoppedOrMoving === "stopped" &&
         sawOtherCar === "no"
     ) {
-        return "You are probably at fault or majority at fault!"
+        return 15
     } else if (
         ivAction === "backing" && (
         cvAction === "forward" ||
@@ -31,7 +32,26 @@ export default (
         cvPoi === "leftFrontCorner" ||
         cvPoi === "rightFrontCorner"
     )) {
-        return "You may be partially at fault"
+        return 16
+    } else if (
+        ivAction === "forward" && (
+        cvAction === "backing" ||
+        cvAction === "unknown"
+    ) && (
+        cvDistanceOut === "half" ||
+        cvDistanceOut === "3quarters" ||
+        cvDistanceOut === "fully"
+    ) && (
+        cvPoi === "leftSide" ||
+        cvPoi === "rightSide" ||
+        cvPoi === "leftQuarter" ||
+        cvPoi === "rightQuarter"
+    ) && (
+        ivPoi === "frontBumper" ||
+        ivPoi === "leftFrontCorner" ||
+        ivPoi === "rightFrontCorner"
+    )) {
+        return 17
     } else if (
         ivAction === "backing" && (
         cvAction === "forward" ||
@@ -47,7 +67,21 @@ export default (
         cvPoi === "rightFender" ||
         cvPoi === "leftFender"   
     )) {
-        return "You're at fault!"
+        return 18
+    } else if (
+        ivAction === "forward" &&
+        cvAction === "backing" && (
+        cvPoi === "rearBumper" ||
+        cvPoi === "leftRearCorner" ||
+        cvPoi === "rightRearCorner"
+    ) && (
+        ivPoi === "frontBumper" ||
+        ivPoi === "leftFrontCorner" ||
+        ivPoi === "rightFrontCorner" ||
+        ivPoi === "rightFender" ||
+        ivPoi === "leftFender"   
+    )) {
+        return 19
     } else if (
         ivAction === "backing" && (
         cvAction === "forward" ||

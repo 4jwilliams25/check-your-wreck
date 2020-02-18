@@ -14,7 +14,6 @@ import backingFault from './FaultFunctions/backingFault';
 export default function AccidentForm() {
 
     // Form State
-    const [fault, setFault] = React.useState("");
     const [accidentType, setAccidentType] = React.useState("");
     // Shared State
     const [ivAction, setIvAction] = React.useState("");
@@ -98,7 +97,7 @@ export default function AccidentForm() {
                 carPosition,
                 pushed))
         } else if (accidentType === "laneChange") {
-            setFault(laneChangeFault(
+            setAccidentCode(laneChangeFault(
                 ivAction, 
                 cvAction, 
                 ivPoi, 
@@ -106,12 +105,13 @@ export default function AccidentForm() {
                 sawOtherCar, 
                 evasiveAction))
         } else if (accidentType === "backing") {
-            setFault(backingFault(
+            setAccidentCode(backingFault(
                 cvStoppedOrMoving,
                 sawOtherCar,
                 ivAction,
                 cvAction,
                 ivDistanceOut,
+                cvDistanceOut,
                 ivPoi,
                 cvPoi,
                 evasiveAction

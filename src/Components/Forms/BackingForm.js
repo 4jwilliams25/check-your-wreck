@@ -72,6 +72,7 @@ export default function BackingForm(props) {
                 <option value=""></option>
                 <option value="backing">They were backing</option>
                 <option value="forward">They were moving forward</option>
+                <option value="stopped">Neither</option>
                 <option value="unknown">I dont know</option>
             </select>
 
