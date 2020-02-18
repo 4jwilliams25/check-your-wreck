@@ -50,6 +50,7 @@ export default function BackingForm(props) {
                 <option value=""></option>
                 <option value="backing">I was backing</option>
                 <option value="forward">I was moving forward</option>
+                <option value="neither">Neither</option>
             </select>
 
             <br />
@@ -58,7 +59,7 @@ export default function BackingForm(props) {
             <select required onChange={e => props.setSawOtherCar(e.target.value)}>
                 <option value=""></option>
                 <option value="yes">I saw the other vehicle before the impact</option>
-                <option value="no">I didn't see the vehcile until or after the impact</option>
+                <option value="no">I didn't see the vehicle until or after the impact</option>
             </select>
 
             <br />

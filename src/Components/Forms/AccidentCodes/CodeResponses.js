@@ -23,9 +23,15 @@ const laneChange = " Whenever we're moving into or across a new lane of traffic 
 
 const backing = " So whenever a driver is in the act of backing they are by definition going against the flow of traffic, whether that is backing straight in a lane or backing out of a parking spot into a road or aisleway. Whenever we're backing and there's an impact that means it wasn't yet safe to back up, and we will more than likely have some, most, or all of the liability depending on the circumstances. A backing driver has the greater responsibility to yield to traffic behind them and only back when it is safe to do so."
 
+const backingStopped = " In a case where one driver was backing and the other vehicle was stopped odds are good that the reason they were stopped is because they were either far enough into the aisleway to be stopped and in drive or moving into drive, or because they saw the other driver and had hit the brakes to avoid the impact meaning that the driver that was still moving had the last clear chance to avoid the accident. In either case the driver that didn't see the other car and was still moving at the moment the cars impacted will likely be wholly or majority at fault for the accident."
+
 const backingButEstablished = " That being said when the point of impact on the backing vehicle is on their side what that physically means is that, at the time of the impact, they were far enough out that they were there to be seen if the other driver had been paying proper attention. If that driver didn't see them, or if they did see them but failed to take any evasive action, they they will likely carry some liability. It could be the majority but will more likely be a minority of responsibility because ultimately they still had the right of way and the backing driver had the greater responsibility to yield."
 
 const backingButNotFar = " When the point of impact is on the back end of the backing vehicle versus the front or front half of the vehcile in the aisle what that physically means is that the backing vehicle wasn't so far out in the aisle that the vehicle moving straight hit them in the side. Physically this just means that the point of impact doesn't support that the backing vehicle was far enough out to have 'control' of the aisleway and should have yielded to the vehicle that was already established in the aisle."
+
+const backingRightBehind = " When the point of impact is on the side or even back end of the vehicle that was moving straight what that physically means is that, at the time of the impact, that vehicle was well established behind if not most of the way past the vehicle that was backing out. This means that they were there to be seen and if the backing driver had more carefully checked behind them for traffic and oncoming traffic before and as they were backing they almost certainly would have seen that other vehicle and avoided the impact."
+
+const bothBackingMajority = " In a case where both vehicles are backing but one vehicle's point of impact is somewhere on the side while the other's is on the back end what that physically indicates is that the vehicle with the side impact was at more of a right angle to the other vehicle. This implies that the vehicle was further into the act of backing out than the vehicle with the back end impacts and probably started backing earlier. This generally equates to them having more control of the aisleway than the other car so the vehicle with the rear end impacts will usually end up either at fault or majority at fault for the accident. Other factors can go into this such as where the two cars were in relation to each other before backing or whether the spaces were angled or straight but liability will usually follow the car with the back end impacts. If you're not sure you can take two toy cars (or something to simulate them) and act out the accident based on where the two cars were positioned initially and the points of impact. If you see that one car would have had to have been further out of their spot for those points of impact to happen that car will likely be either not at fault or only have a minority of fault."
 
 // Response Object
 export const responses = {
@@ -113,34 +119,90 @@ export const responses = {
         dutiesOwedBreached +
         rightOfWay +
         backing +
-        " In a case where one driver was backing and the other vehicle was stopped odds are good that the reason they were stopped is because they were either far enough into the aisleway to be stopped and in drive or moving into drive, or because they saw the other driver and had hit the brakes to avoid the impact meaning that the driver that was still moving had the last clear chance to avoid the accident. In either case the driver that didn't see the other car and was still moving at the moment the cars impacted will likely be wholly or majority at fault for the accident."
+        backingStopped
         ],
-    16: ["You may be partially at fault.",
+    16: ["You may have no fault or only some fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        backingStopped +
+        compNegFault
+        ],
+    17: ["You may be partially at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing +
         backingButEstablished +
         compNegFault
         ],
-    17: ["You have some fault and are probably majority at fault.",
+    18: ["You have some fault and are probably majority at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing +
         backingButEstablished +
         compNegFault
         ],
-    18: ["You're at fault.",
+    19: ["You're at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing +
         backingButEstablished +
         backingButNotFar
         ],
-    19: ["You're not at fault.",
+    20: ["You're not at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing +
         backingButEstablished +
         backingButNotFar
+        ],
+    21: ["You're at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        backingRightBehind
+        ],
+    22: ["You're not at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        backingRightBehind
+        ],
+    23: ["You're probably at fault or majority at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        bothBackingMajority +
+        compNegFault
+        ],
+    24: ["You may have some fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        bothBackingMajority+
+        compNegFault
+        ],
+    25: ["You're probably at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing
+        ],
+    26: ["You're both at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        " Civil liability is not an all or nothing system. And it shouldn't be. Realistically more than one person can contribute to an accident happening. In a case where both drivers were backing at the time of the impact both drivers will likely carry a portion of the liability that will probably mirror how far into the aisle or roadway they each were at the time of the impact. In other words the driver that was furthest out will likely have the lesser liability. That being said these types of backing accidents are often either disputed because one person or another is lying or legitimately doesn't remember the accident the same way as the other. It also isn't uncommon for liability to be split 50/50 for this type of accident either."
+        ],
+    27: ["You may have some fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing +
+        " That being said civil liability is not an all or nothing system. And it shouldn't be. Realistically more than one person can contribute to an accident happening. In a case where a driver see's another vehicle prior to an impact that driver also has a responsibility to try to take evasive action to avoid the accident (swerve, hit the brakes, honk, etc.), regardless of if they had the right of way or not. Failure to do so can result in that driver having some liability for the accident, usually less than half or a minority. It can be a stretch, depending on how much time and opportunity the driver had to take evasive action. However the argument isn't completely without merit so the insurance company of the other driver may dispute some liability for the accident and it may be upheld. Or they may not, depending on the evidence." +
+        compNegFault
+        ],
+    28: ["You're probably not at fault.",
+        dutiesOwedBreached +
+        rightOfWay +
+        backing
         ]
 }

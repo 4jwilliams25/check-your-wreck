@@ -106,6 +106,7 @@ export default function AccidentForm() {
                 evasiveAction))
         } else if (accidentType === "backing") {
             setAccidentCode(backingFault(
+                ivStoppedOrMoving,
                 cvStoppedOrMoving,
                 sawOtherCar,
                 ivAction,
