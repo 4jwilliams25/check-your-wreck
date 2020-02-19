@@ -1,2 +1,7 @@
 import React from 'react';
-// import { makeStyles, Appbar, Toolbar, Typography } from 
+
+export default function Homepage() {
+    return (
+        <div>This is my homepage</div>
+    )
+}
