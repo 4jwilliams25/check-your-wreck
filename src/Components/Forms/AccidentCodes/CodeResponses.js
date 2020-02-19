@@ -1,5 +1,6 @@
 // Reused Syntax
 // TODO: refactor the object to return either an AF or NAF statement and then the same explanation, make the explanations neutral, can cut the code nearly in half
+// TODO: refactor with links at the bottom of the reports with the most common arguments against the decisions and their rebuttals
 
 // General
 const proximateCause = " Another major factor that goes into determining fault in these situations is called 'Proxmate Cause', which basically means the most immediate cause."
@@ -18,6 +19,10 @@ const multipleCarsNaf = " When it comes to multiple car pileups it comes down to
 // For lane changes
 
 const laneChange = " Whenever we're moving into or across a new lane of traffic we have the greater responsibility to maintain proper lookout and only move into or across that lane when it was safe to do so. This means we HAVE to yield to traffic established in that lane. They do NOT have to yield to us. Courtesy doesn't determine fault in an accident. Right of way and duties owed/breached does."
+
+const changingPartEstablished = " In a case like this the driver that was changing lanes may well be considered the wholly at fault driver. However, the point of impact being on their back end indicates that they had enought time and clearance to get at least partially established in the lane and the driver coming up in that lane at the end of the day hit them. The lane changing driver's insurance may argue that if their driver had time to get that far into the lane then the following driver should also have had time, had they been paying proper attention, to see that other car coming in and take appropriate evasive action to let them in and avoid an impact. It's a stretch, but the argument isn't completely without merit so they may ultimately be able to get that decision uphelp. In most states though it will still be considered an at fault accident for their driver and a not at fault accident for the driver that was already in the lane. But the not at fault driver may still end up with a smaller portion of liability."
+
+const changingSaf = " In a case where the vehicle changing lanes imacts the side or back panel of the vehicle that was moving straight in the lane those points of impact prove that, one way or another, that car was there to be seen, established in the lane, and in fact was beside or most of the way past the driver that was changing lanes. It's a hard indicator of improper lookout and that the driver changing lanes was not careful enough in making sure it was safe to move into the new lane."
 
 // For backing
 
@@ -69,25 +74,25 @@ export const responses = {
         dutiesOwedBreached +
         rightOfWay +
         laneChange +
-        " In a case like this the driver that was changing lanes may well be considered the wholly at fault driver. However, the point of impact being on their back end indicates that they had enought time and clearance to get at least partially established in the lane and the driver coming up in that lane at the end of the day hit them. The lane changing driver's insurance may argue that if their driver had time to get that far into the lane then the following driver should also have had time, had they been paying proper attention, to see that other car coming in and take appropriate evasive action to let them in and avoid an impact. It's a stretch, but the argument isn't completely without merit so they may ultimately be able to get that decision uphelp. In most states though it will still be considered an at fault accident for their driver and a not at fault accident for the driver that was already in the lane. But the not at fault driver may still end up with a smaller portion of liability."
+        changingPartEstablished
         ],
     8: ["You're at fault, or at least mostly at fault.",
         dutiesOwedBreached +
         rightOfWay +
         laneChange +
-        " In a case like this the driver that was changing lanes may well be considered the wholly at fault driver. However, the point of impact being on their back end indicates that they had enought time and clearance to get at least partially established in the lane and the driver coming up in that lane at the end of the day hit them. The lane changing driver's insurance may argue that if their driver had time to get that far into the lane then the following driver should also have had time, had they been paying proper attention, to see that other car coming in and take appropriate evasive action to let them in and avoid an impact. It's a stretch, but the argument isn't completely without merit so they may ultimately be able to get that decision uphelp. In most states though it will still be considered an at fault accident for their driver and a not at fault accident for the driver that was already in the lane. But the not at fault driver may still end up with a smaller portion of liability."
+        changingPartEstablished
         ],
     9: ["You're at fault.",
         dutiesOwedBreached +
         rightOfWay +
         laneChange +
-        " In a case where the vehicle changing lanes imacts the side or back panel of the vehicle that was moving straight in the lane those points of impact prove that, one way or another, that car was there to be seen, established in the lane, and in fact was beside or most of the way past the driver that was changing lanes. It's a hard indicator of improper lookout and that the driver changing lanes was not careful enough in making sure it was safe to move into the new lane."
+        changingSaf
         ],
     10: ["You're not at fault.",
         dutiesOwedBreached +
         rightOfWay +
         laneChange +
-        " In a case where the vehicle changing lanes imacts the side or back panel of the vehicle that was moving straight in the lane those points of impact prove that, one way or another, that car was there to be seen, established in the lane, and in fact was beside or most of the way past the driver that was changing lanes. It's a hard indicator of improper lookout and that the driver changing lanes was not careful enough in making sure it was safe to move into the new lane."
+        changingSaf
         ],
     11: ["You're probably at fault.",
         dutiesOwedBreached +
