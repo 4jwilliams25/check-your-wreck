@@ -1,5 +1,13 @@
 import React from "react";
-import { makeStyles, InputLabel, MenuItem, FormHelperText, FormControl, Select, Typography } from '@material-ui/core';
+import { 
+    makeStyles,
+    InputLabel, 
+    MenuItem, 
+    Button, 
+    FormControl, 
+    Select, 
+    Typography 
+} from '@material-ui/core';
 import { responses } from './AccidentCodes/CodeResponses';
 
 // Component Imports
@@ -156,7 +164,14 @@ export default function AccidentForm() {
                 {accidentType === "backing" ? backingFields : ''}
                 <br />
                 <div>
-                    <button onClick={handleSubmit}>So who's fault is this?</button>
+                    <Button 
+                        onClick={handleSubmit} 
+                        size="small"
+                        variant="outlined" 
+                        color="primary"
+                    >
+                        So who's fault is this?
+                    </Button>
                 </div>
                 <br />
                 <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
