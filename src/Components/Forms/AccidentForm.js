@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles, InputLabel, MenuItem, FormHelperText, FormControl, Select, Typography } from '@material-ui/core';
 import { responses } from './AccidentCodes/CodeResponses';
 
 // Component Imports
@@ -11,7 +12,21 @@ import rearEndFault from './FaultFunctions/rearEndFault';
 import laneChangeFault from './FaultFunctions/laneChangeFault';
 import backingFault from './FaultFunctions/backingFault';
 
+
+    // Form Styling
+    const useStyles = makeStyles(theme => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 300,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }))
+
 export default function AccidentForm() {
+    const classes = useStyles();
+    const inputLabel = React.useRef(null);
 
     // Form State
     const [accidentType, setAccidentType] = React.useState("");
@@ -121,26 +136,32 @@ export default function AccidentForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h4>Accident Form</h4>
-            <div>What kind of accident were you in?</div>
-            <select required onChange={e => setAccidentType(e.target.value)}>
-                <option value=""></option>
-                <option value="rearEnd">A rear end accident.</option>
-                <option value="laneChange">A lane change accident.</option>
-                <option value="backing">A backing accident.</option>
-            </select>
-            <br />
-            {accidentType === "rearEnd" ? rearEndFields : ''}
-            {accidentType === "laneChange" ? laneChangeFields : ''}
-            {accidentType === "backing" ? backingFields : ''}
-            <br />
-            <div>
-                <button>So who's fault is this?</button>
-            </div>
-            <br />
-            <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
-            <h3>{accidentCode ? responses[accidentCode][1] : ''}</h3>
-        </form>
+        <div>
+            <FormControl className={classes.formControl}>
+                <InputLabel>What kind of accident were you in?</InputLabel>
+                <Select 
+                    required
+                    value={accidentType} 
+                    onChange={e => setAccidentType(e.target.value)}
+                >
+                    <MenuItem value=""></MenuItem>
+                    <MenuItem value="rearEnd">A rear end accident.</MenuItem>
+                    <MenuItem value="laneChange">A lane change accident.</MenuItem>
+                    <MenuItem value="backing">A backing accident.</MenuItem>
+                </Select>
+            </FormControl>
+                <br />
+                {accidentType === "rearEnd" ? rearEndFields : ''}
+                {accidentType === "laneChange" ? laneChangeFields : ''}
+                {accidentType === "backing" ? backingFields : ''}
+                <br />
+                <div>
+                    <button onClick={handleSubmit}>So who's fault is this?</button>
+                </div>
+                <br />
+                <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
+                <h3>{accidentCode ? responses[accidentCode][1] : ''}</h3>
+            
+        </div>
     )
 }

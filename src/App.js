@@ -4,9 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import TopBar from './Components/Layout/TopBar';
 import NavBar from './Components/Layout/NavBar';
-import AccidentForm from './Components/Forms/AccidentForm';
-import Homepage from './Components/Layout/Homepage';
-import FAQ from './Components/FAQ/FAQ';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Image from 'material-ui-image';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import CarWreck from '../../Images/carwreck.jpg'
 
 export default function Homepage() {
@@ -24,7 +24,7 @@ export default function Homepage() {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography color="primary" align="center">
-                        Currently this website works for 3 of the most common types of accidents; rear ends, lane changes, and backing accidents. We will continue to add additional supported accident types over time.
+                        Currently this website works for 3 of the most common types of accidents; rear ends, lane changes, and backing accidents. We will continue to add additional accident types over time.
                     </Typography>
                 </Grid>
                 <Grid item xs={3} />
