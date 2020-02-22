@@ -151,7 +151,7 @@ export default function LaneChangeForm(props) {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     }
 
-    return(
+    return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => (
