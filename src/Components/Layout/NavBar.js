@@ -4,7 +4,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import TabPanel from './TabPanel';
 import Homepage from './Homepage';
-import AccidentForm from '../Forms/AccidentForm';
+import AccidentDash from '../Layout/AccidentDash';
 import FAQ from '../FAQ/FAQ';
 
 function allyProps(index) {
@@ -59,7 +59,7 @@ export default function NavBar() {
                     <Homepage />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <AccidentForm />
+                    <AccidentDash />
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <FAQ />

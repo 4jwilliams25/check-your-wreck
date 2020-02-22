@@ -1,14 +1,14 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
+
 import { 
     makeStyles,
     InputLabel, 
     MenuItem, 
     Button, 
     FormControl, 
-    Select, 
-    Typography 
+    Select
 } from '@material-ui/core';
-import { responses } from './AccidentCodes/CodeResponses';
 
 // Component Imports
 import RearEndForm from './RearEndForm';
@@ -32,7 +32,7 @@ import backingFault from './FaultFunctions/backingFault';
         },
     }))
 
-export default function AccidentForm() {
+export default function AccidentForm(props) {
     const classes = useStyles();
     const inputLabel = React.useRef(null);
 
@@ -45,7 +45,7 @@ export default function AccidentForm() {
     const [cvAction, setCvAction] = React.useState("");
     const [ivPoi, setIvPoi] = React.useState("");
     const [cvPoi, setCvPoi] = React.useState("");
-    const [accidentCode, setAccidentCode] = React.useState(0)
+    // const [accidentCode, setAccidentCode] = React.useState(0)
     // Rear End Accident State
     const [numberOfCars, setNumberOfCars] = React.useState("");
     const [carPosition, setCarPosition] = React.useState("");
@@ -111,16 +111,20 @@ export default function AccidentForm() {
         />
     )
 
+    let history = useHistory();
+
     // Submit Handler
     const handleSubmit = e => {
         e.preventDefault();
+        history.push('/report')
+
         if (accidentType === "rearEnd") {
-            setAccidentCode(rearEndFault(
+            props.setAccidentCode(rearEndFault(
                 numberOfCars,
                 carPosition,
                 pushed))
         } else if (accidentType === "laneChange") {
-            setAccidentCode(laneChangeFault(
+            props.setAccidentCode(laneChangeFault(
                 ivAction, 
                 cvAction, 
                 ivPoi, 
@@ -128,7 +132,7 @@ export default function AccidentForm() {
                 sawOtherCar, 
                 evasiveAction))
         } else if (accidentType === "backing") {
-            setAccidentCode(backingFault(
+            props.setAccidentCode(backingFault(
                 ivStoppedOrMoving,
                 cvStoppedOrMoving,
                 sawOtherCar,
@@ -173,9 +177,6 @@ export default function AccidentForm() {
                         So who's fault is this?
                     </Button>
                 </div>
-                <br />
-                <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
-                <h3>{accidentCode ? responses[accidentCode][1] : ''}</h3>
             
         </div>
     )
