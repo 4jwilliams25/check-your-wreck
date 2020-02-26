@@ -1,4 +1,4 @@
-// TODO: total loss, will the insurance company pay all my expenses, limits issues, how long will a liability decision take
+// TODO: total loss, will the insurance company pay all my expenses, limits issues, how long will a liability decision take, reasonable repair cost
 
 import React from 'react';
 import { 

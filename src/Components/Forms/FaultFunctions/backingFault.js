@@ -12,12 +12,14 @@ export default (
     ) => {
     if (
         cvStoppedOrMoving === "stopped" &&
-        sawOtherCar === "no"
+        sawOtherCar === "no" &&
+        ivAction === "backing"
     ) {
         return 15
     } else if (
         ivStoppedOrMoving === "stopped" &&
-        cvStoppedOrMoving === "moving"
+        cvStoppedOrMoving === "moving" &&
+        cvAction === "backing"
     ) {
       return 16  
     } else if (

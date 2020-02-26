@@ -7,7 +7,7 @@ const proximateCause = " Another major factor that goes into determining fault i
 
 const dutiesOwedBreached = "    Perhaps the biggest factor that determines fault in an auto accident is called duties owed/duties breached. Basically it refers to our legal responsibilities as drivers. Who had the greater responsibility (or duty) and who didn't. Who met their responsibility and who didn't. These duties are often tied to right of way. Who had it, and who didn't."
 
-const rightOfWay = " The easiest way to think of right of way is to think of the flow of traffic. Whenever we're moving into a new are of traffic or across the flow of traffic we have the greater responsibility to keep a proper lookout and only move into or across that traffic only when it is safe to do so. The person entering does not have the right of way. The person already established in that flow of traffic does."
+const rightOfWay = " The easiest way to think of right of way is to think of the flow of traffic. Whenever we're moving into a new area of traffic or across the flow of traffic we have the greater responsibility to keep a proper lookout and only move into or across that traffic only when it is safe to do so. The person entering does not have the right of way. The person already established in that flow of traffic does."
 
 const compNegFault = " If one driver caries more liability than the other they are considered 'majority' at fault and it is an at fault accident for them. It varies from state to state whether an accident is considered at fault or not at fault for a 'minority' at fault driver."
 
