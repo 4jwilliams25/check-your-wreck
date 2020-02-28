@@ -1,4 +1,5 @@
 // TODO: add a section that displays their answers on the form
+// TODO: add a second page that takes probable liab, drivability, coverage and gives recomendations
 
 import React from 'react';
 import { Link } from 'react-router-dom';
