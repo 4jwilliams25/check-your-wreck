@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { useDispatch } from 'react-redux';
 import { getRearEnds } from '../src/Store/rearEnders/rearEndActions';
 import { getLaneChanges } from '../src/Store/laneChanges/laneChangeActions';
+import { getBackings } from '../src/Store/backing/backingActions';
 
 import TopBar from './Components/Layout/TopBar';
 import NavBar from './Components/Layout/NavBar';
@@ -16,6 +17,7 @@ function App() {
   useEffect(() => {
     dispatch(getRearEnds());
     dispatch(getLaneChanges());
+    dispatch(getBackings());
   }, [dispatch])
 
   return (

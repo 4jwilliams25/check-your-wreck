@@ -3,6 +3,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import rearEndReducer from './rearEnders/rearEndReducer';
 import laneChangeReducer from './laneChanges/laneChangeReducer';
+import backingReducer from './backing/backingReducer';
 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -10,6 +11,7 @@ import logger from 'redux-logger';
 const rootReducer = combineReducers({
     rearEnds: rearEndReducer,
     laneChanges: laneChangeReducer,
+    backings: backingReducer,
 });
 
 const middleware = [thunk, logger];
