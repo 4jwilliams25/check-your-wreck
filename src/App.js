@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useDispatch } from 'react-redux';
 import { getRearEnds } from '../src/Store/rearEnders/rearEndActions';
+import { getLaneChanges } from '../src/Store/laneChanges/laneChangeActions';
 
 import TopBar from './Components/Layout/TopBar';
 import NavBar from './Components/Layout/NavBar';
@@ -14,6 +15,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRearEnds());
+    dispatch(getLaneChanges());
   }, [dispatch])
 
   return (
