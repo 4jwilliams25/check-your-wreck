@@ -7,6 +7,10 @@ import {
     Paper,
     Fab,
     Zoom,
+    Grid,
+    List,
+    ListItem,
+    ListItemText,
     makeStyles,
     useTheme
 } from '@material-ui/core';
@@ -30,11 +34,12 @@ const useStyles = makeStyles(theme => ({
     fabEdit: {
         position: 'absolute',
         bottom: theme.spacing(2),
-        left: theme.spacing(2),
+        right: theme.spacing(2),
+        marginBottom: "60px",
     }
 }))
 
-export default function ProfileLoss(props) {
+export default function ProfileLoss({ loss }) {
     const classes = useStyles();
     const theme = useTheme();
     const [hover, setHover] = useState(false);
@@ -48,7 +53,7 @@ export default function ProfileLoss(props) {
         exit: theme.transitions.duration.leavingScreen,
     }
 
-    switch (props.loss.accident_type) {
+    switch (loss.accident_type) {
         case 'rearEnd': 
             return (
                     <ExpansionPanel>
@@ -64,11 +69,42 @@ export default function ProfileLoss(props) {
                             onMouseEnter={toggleHoverState}
                             onMouseLeave={toggleHoverState}
                         >
-                            <Typography variant="subtitle2">Blah blah blah</Typography>
+                            <Grid container spacing={2}>
+                                <div>
+                                    <List>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="How many cars were there?"
+                                                    secondary={loss.number_of_cars}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Where was your car?"
+                                                    secondary={loss.car_position}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                            {loss.pushed ? (
+                                                <Grid item xs={12} md={6}>
+                                                    <ListItem>
+                                                        <ListItemText 
+                                                            primary="Did you hit the car in front of you first or were you pushed?"
+                                                            secondary={loss.pushed}
+                                                        />
+                                                    </ListItem>
+                                                </Grid>
+                                            ) : ""}
+                                    </List>
+                                </div>
+                            </Grid>
                             {hover && (
                                 <div>
                                 <Zoom
-                                    in={3}
+                                    in={true}
                                     timeout={transitionDuration}
                                     style={{
                                         transitionDelay: transitionDuration.exit,
@@ -84,7 +120,7 @@ export default function ProfileLoss(props) {
                                     </Fab>
                                 </Zoom>
                                 <Zoom
-                                    in={3}
+                                    in={true}
                                     timeout={transitionDuration}
                                     style={{
                                         transitionDelay: transitionDuration.exit,
@@ -120,11 +156,66 @@ export default function ProfileLoss(props) {
                     onMouseEnter={toggleHoverState}
                     onMouseLeave={toggleHoverState}
                 >
-                    <Typography variant="subtitle2">Blah blah blah</Typography>
+                    <Grid container spacing={2}>
+                                <div>
+                                    <List>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Were you going straight or changing lanes at the time of impact?"
+                                                    secondary={loss.iv_action}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Did you see the other car before the impact?"
+                                                    secondary={loss.saw_other_car}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                            {loss.evasive_action ? (
+                                                <Grid item xs={12} md={6}>
+                                                    <ListItem>
+                                                        <ListItemText 
+                                                            primary="Did you take any evasive action?"
+                                                            secondary={loss.evasive_action}
+                                                        />
+                                                    </ListItem>
+                                                </Grid>
+                                            ) : ""}
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Was the other vehicle going straight or changing lanes at the time of the impact?"
+                                                    secondary={loss.cv_action}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="What was your car's point of impact?"
+                                                    secondary={loss.iv_poi}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="What was the other car's point of impact?"
+                                                    secondary={loss.cv_poi}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                    </List>
+                                </div>
+                            </Grid>
                     {hover && (
                         <div>
                         <Zoom
-                            in={3}
+                            in={true}
                             timeout={transitionDuration}
                             style={{
                                 transitionDelay: transitionDuration.exit,
@@ -140,7 +231,7 @@ export default function ProfileLoss(props) {
                             </Fab>
                         </Zoom>
                         <Zoom
-                            in={3}
+                            in={true}
                             timeout={transitionDuration}
                             style={{
                                 transitionDelay: transitionDuration.exit,
@@ -176,11 +267,102 @@ export default function ProfileLoss(props) {
                             onMouseEnter={toggleHoverState}
                             onMouseLeave={toggleHoverState}
                         >
-                            <Typography variant="subtitle2">Blah blah blah</Typography>
+                            <Grid container spacing={2}>
+                                <div>
+                                    <List>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Were you backing or going forward at the time of impact?"
+                                                    secondary={loss.iv_action}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Did you see the other car before the impact?"
+                                                    secondary={loss.saw_other_car}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                            {loss.evasive_action ? (
+                                                <Grid item xs={12} md={6}>
+                                                    <ListItem>
+                                                        <ListItemText 
+                                                            primary="Did you take any evasive action?"
+                                                            secondary={loss.evasive_action}
+                                                        />
+                                                    </ListItem>
+                                                </Grid>
+                                            ) : ""}
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Was your vehicle stopped or in motion at the time of impact?"
+                                                    secondary={loss.iv_stopped_or_moving}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        {loss.iv_distance_out ? (
+                                                <Grid item xs={12} md={6}>
+                                                    <ListItem>
+                                                        <ListItemText 
+                                                            primary="How far out of your spot were you?"
+                                                            secondary={loss.iv_distance_out}
+                                                        />
+                                                    </ListItem>
+                                                </Grid>
+                                            ) : ""}
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Was the other vehicle backing or moving forward at the time of impact?"
+                                                    secondary={loss.cv_action}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="Was the other vehicle stopped or in motion?"
+                                                    secondary={loss.cv_stopped_or_moving}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        {loss.cv_distance_out ? (
+                                                <Grid item xs={12} md={6}>
+                                                    <ListItem>
+                                                        <ListItemText 
+                                                            primary="How far out of their spot was the other car?"
+                                                            secondary={loss.cv_distance_out}
+                                                        />
+                                                    </ListItem>
+                                                </Grid>
+                                            ) : ""}
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="What was your car's point of impact?"
+                                                    secondary={loss.iv_poi}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <ListItem>
+                                                <ListItemText 
+                                                    primary="What was the other car's point of impact?"
+                                                    secondary={loss.cv_poi}
+                                                />
+                                            </ListItem>
+                                        </Grid>
+                                    </List>
+                                </div>
+                            </Grid>
                             {hover && (
                                 <div>
                                 <Zoom
-                                    in={3}
+                                    in={true}
                                     timeout={transitionDuration}
                                     style={{
                                         transitionDelay: transitionDuration.exit,
@@ -196,7 +378,7 @@ export default function ProfileLoss(props) {
                                     </Fab>
                                 </Zoom>
                                 <Zoom
-                                    in={3}
+                                    in={true}
                                     timeout={transitionDuration}
                                     style={{
                                         transitionDelay: transitionDuration.exit,
