@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
     heading: {
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
+        marginRight: "40px",
     },
     fabDelete: {
         position: 'absolute',
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         bottom: theme.spacing(2),
         right: theme.spacing(2),
         marginBottom: "60px",
-    }
+    },
 }))
 
 export default function ProfileLoss({ loss }) {
@@ -62,6 +63,7 @@ export default function ProfileLoss({ loss }) {
                                 expandIcon={<ExpandMoreIcon />}
                             >
                                 <Typography color="primary" className={classes.heading}>Rear End Loss</Typography>
+                            <Typography>{loss.date_created}</Typography>
                             </ExpansionPanelSummary>
                         </Paper>
                         
@@ -149,6 +151,7 @@ export default function ProfileLoss({ loss }) {
                         expandIcon={<ExpandMoreIcon />}
                     >
                         <Typography color="primary" className={classes.heading}>Lane Change Loss</Typography>
+                        <Typography>{loss.date_created}</Typography>
                     </ExpansionPanelSummary>
                 </Paper>
                 
@@ -260,6 +263,7 @@ export default function ProfileLoss({ loss }) {
                                 expandIcon={<ExpandMoreIcon />}
                             >
                                 <Typography color="primary" className={classes.heading}>Backing Loss</Typography>
+                                <Typography>{loss.date_created}</Typography>
                             </ExpansionPanelSummary>
                         </Paper>
                         
