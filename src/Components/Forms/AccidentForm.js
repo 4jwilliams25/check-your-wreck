@@ -22,6 +22,11 @@ import rearEndFault from './FaultFunctions/rearEndFault';
 import laneChangeFault from './FaultFunctions/laneChangeFault';
 import backingFault from './FaultFunctions/backingFault';
 
+// Post Request Imports
+import { useDispatch } from 'react-redux';
+import { addRearEnd } from '../../Store/rearEnders/rearEndActions';
+import { addLaneChange } from '../../Store/laneChanges/laneChangeActions';
+import { addBacking } from '../../Store/backing/backingActions';
 
     // Form Styling
     const useStyles = makeStyles(theme => ({
@@ -114,18 +119,49 @@ export default function AccidentForm(props) {
     )
 
     let history = useHistory();
+    const dispatch = useDispatch();
 
     // Submit Handler
     const handleSubmit = e => {
         e.preventDefault();
+
+        let date = new Date();
+        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+
         history.push('/report')
 
         if (accidentType === "rearEnd") {
+
+            const newLoss = {
+                accident_type: "rearEnd",
+                number_of_cars: numberOfCars,
+                car_position: carPosition,
+                pushed: pushed,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
             props.setAccidentCode(rearEndFault(
                 numberOfCars,
                 carPosition,
-                pushed))
+                pushed));
+
+            dispatch(addRearEnd(newLoss));
+
         } else if (accidentType === "laneChange") {
+
+            const newLoss = {
+                accident_type: "laneChange",
+                iv_action: ivAction,
+                cv_action: cvAction,
+                saw_other_car: sawOtherCar,
+                evasive_action: evasiveAction,
+                iv_poi: ivPoi,
+                cv_poi: cvPoi,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
             props.setAccidentCode(laneChangeFault(
                 ivAction, 
                 cvAction, 
@@ -133,7 +169,27 @@ export default function AccidentForm(props) {
                 cvPoi, 
                 sawOtherCar, 
                 evasiveAction))
+
+            dispatch(addLaneChange(newLoss))
+
         } else if (accidentType === "backing") {
+
+            const newLoss = {
+                accident_type: "backing",
+                iv_action: ivAction,
+                cv_action: cvAction,
+                saw_other_car: sawOtherCar,
+                evasive_action: evasiveAction,
+                iv_stopped_or_moving: ivStoppedOrMoving,
+                cv_stopped_or_moving: cvStoppedOrMoving,
+                iv_distance_out: ivDistanceOut,
+                cv_distance_out: cvDistanceOut,
+                iv_poi: ivPoi,
+                cv_poi: cvPoi,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
             props.setAccidentCode(backingFault(
                 ivStoppedOrMoving,
                 cvStoppedOrMoving,
@@ -146,6 +202,8 @@ export default function AccidentForm(props) {
                 cvPoi,
                 evasiveAction
             ))
+
+            dispatch(addBacking(newLoss))
         }
     }
 

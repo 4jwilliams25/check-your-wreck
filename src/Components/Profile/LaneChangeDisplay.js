@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
-    ExpansionPanel,
-    ExpansionPanelSummary,
     ExpansionPanelDetails,
-    Typography,
-    Paper,
     Fab,
     Zoom,
     Grid,
