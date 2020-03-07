@@ -16,14 +16,14 @@ import BuildIcon from '@material-ui/icons/Build';
 const useStyles = makeStyles(theme => ({
     fabDelete: {
         position: 'absolute',
-        bottom: theme.spacing(2),
+        top: theme.spacing(2),
         right: theme.spacing(2),
     },
     fabEdit: {
         position: 'absolute',
-        bottom: theme.spacing(2),
+        top: theme.spacing(2),
         right: theme.spacing(2),
-        marginBottom: "60px",
+        marginTop: "60px",
     },
 }))
 

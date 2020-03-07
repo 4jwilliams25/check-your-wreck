@@ -17,13 +17,13 @@ import PublishIcon from '@material-ui/icons/Publish';
 const useStyles = makeStyles(theme => ({
     fabBack: {
         position: 'absolute',
-        bottom: theme.spacing(2),
+        top: theme.spacing(2),
         right: theme.spacing(2),
-        marginBottom: "60px",
+        marginTop: "60px",
     },
     fabEdit: {
         position: 'absolute',
-        bottom: theme.spacing(2),
+        top: theme.spacing(2),
         right: theme.spacing(2),
         backgroundColor: "gold"
     },
