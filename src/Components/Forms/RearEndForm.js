@@ -45,7 +45,7 @@ export default function RearEndForm(props) {
     let hitOrPushed = (
         <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">Did you hit the car in front of you first or were you pushed?</FormLabel>
-                <RadioGroup required value={props.pushed} onChange={e => props.setPushed(e.target.value)}>
+                <RadioGroup value={props.pushed} onChange={e => props.setPushed(e.target.value)}>
                     <FormControlLabel value="rearEnded" control={<Radio />} label={"I hit the car in front, then was rear ended"} />
                     <FormControlLabel value="pushed" control={<Radio />} label={"I was hit from behind first, then pushed into the car in front of me"} />
                 </RadioGroup>
@@ -58,7 +58,7 @@ export default function RearEndForm(props) {
                 return (
                     <FormControl component="fieldset" className={classes.formControl}>
                         <FormLabel component="legend">How many cars were there?</FormLabel>
-                        <RadioGroup required value={props.numberOfCars} onChange={e => props.setNumberOfCars(e.target.value)}>
+                        <RadioGroup value={props.numberOfCars} onChange={e => props.setNumberOfCars(e.target.value)}>
                             <FormControlLabel value="2" control={<Radio />} label="Two cars" />
                             <FormControlLabel value=">2" control={<Radio />} label="More than two cars" />
                         </RadioGroup>
@@ -68,7 +68,7 @@ export default function RearEndForm(props) {
                 return (
                     <FormControl component="fieldset" className={classes.formControl}>
                         <FormLabel component="legend">Where was your car?</FormLabel>
-                            <RadioGroup required value={props.carPosition} onChange={e => props.setCarPosition(e.target.value)}>
+                            <RadioGroup value={props.carPosition} onChange={e => props.setCarPosition(e.target.value)}>
                                 <FormControlLabel value="front" control={<Radio />} label="The front car" />
                                 <FormControlLabel value="back" control={<Radio />} label="The back car" />
                                 {props.numberOfCars === ">2" ? <FormControlLabel value="middle" control={<Radio />} label="Somewhere in the middle" /> : ''}

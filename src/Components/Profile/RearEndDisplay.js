@@ -73,7 +73,7 @@ export default function RearEndDisplay({ loss, handleEditClick }) {
                                                 />
                                             </ListItem>
                                         </Grid>
-                                            {loss.pushed ? (
+                                            {(loss.number_of_cars === ">2" && loss.car_position === "middle") ? (
                                                 <Grid item xs={12} md={6}>
                                                     <ListItem>
                                                         <ListItemText 

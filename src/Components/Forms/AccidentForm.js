@@ -45,6 +45,7 @@ export default function AccidentForm(props) {
 
     // Form State
     const [accidentType, setAccidentType] = React.useState("");
+    const [disable, setDisable] = React.useState(true)
     // Shared State
     const [ivAction, setIvAction] = React.useState("");
     const [sawOtherCar, setSawOtherCar] = React.useState("");
@@ -207,6 +208,37 @@ export default function AccidentForm(props) {
         }
     }
 
+    const handleDisable = () => {
+        if (accidentType === "rearEnd" &&
+            numberOfCars &&
+            carPosition
+        ) {
+            return false
+        } else if (
+            accidentType === "laneChange" &&
+            ivAction &&
+            sawOtherCar &&
+            cvAction &&
+            ivPoi &&
+            cvPoi
+        ) {
+            return false
+        } else if (
+            accidentType === "backing" &&
+            ivAction &&
+            sawOtherCar &&
+            ivStoppedOrMoving &&
+            cvAction &&
+            cvStoppedOrMoving &&
+            ivPoi &&
+            cvPoi
+        ) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     return (
         <div>
             <FormControl className={classes.formControl}>
@@ -233,6 +265,7 @@ export default function AccidentForm(props) {
                         size="small"
                         variant="outlined" 
                         color="primary"
+                        disabled={handleDisable()}
                     >
                         So who's fault is this?
                     </Button>

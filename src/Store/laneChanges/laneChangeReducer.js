@@ -26,7 +26,7 @@ import {
       case ADD_LANECHANGE_PENDING:
         return state;
       case ADD_LANECHANGE_SUCCESS:
-        return [action.payload, ...state];
+        return [...state, action.payload];
       case ADD_LANECHANGE_FAILED:
         return action.payload;
       case REMOVE_LANECHANGE_PENDING:

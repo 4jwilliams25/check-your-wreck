@@ -26,7 +26,7 @@ import {
       case ADD_BACKING_PENDING:
         return state;
       case ADD_BACKING_SUCCESS:
-        return [action.payload, ...state];
+        return [...state, action.payload];
       case ADD_BACKING_FAILED:
         return action.payload;
       case REMOVE_BACKING_PENDING:

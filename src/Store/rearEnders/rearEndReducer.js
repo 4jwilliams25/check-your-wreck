@@ -26,7 +26,7 @@ import {
       case ADD_REAREND_PENDING:
         return state;
       case ADD_REAREND_SUCCESS:
-        return [action.payload, ...state];
+        return [...state, action.payload];
       case ADD_REAREND_FAILED:
         return action.payload;
       case REMOVE_REAREND_PENDING:
