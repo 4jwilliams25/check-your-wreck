@@ -1,4 +1,5 @@
 // TODO: Change the typography's back to InputLabel's and see if you can make the width on the inputs look pretty
+// TODO: fix defect where app errors out when changing number of cars to "2" before getting rid of the pushed field
 
 import React, { useState } from 'react';
 import {
@@ -15,6 +16,9 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PublishIcon from '@material-ui/icons/Publish';
+
+import { useDispatch } from 'react-redux';
+import { updateRearEnd } from '../../Store/rearEnders/rearEndActions';
 
 const useStyles = makeStyles(theme => ({
     fabBack: {
@@ -63,6 +67,27 @@ export default function RearEndEdit({ loss, handleEditClick }) {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
+    const dispatch = useDispatch()
+
+    const submitEdit = () => {
+        let date = new Date();
+        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+
+        const updatedLoss = {
+            id: loss.id,
+            accident_type: "rearEnd",
+            number_of_cars: numberOfCars,
+            car_position: carPosition,
+            pushed: pushed,
+            date_created: loss.date_created,
+            date_updated: currentDate
+        }
+    
+        dispatch(updateRearEnd(updatedLoss))
+
+        handleEditClick()
+    }
+
     return (
                         <ExpansionPanelDetails
                             // onMouseEnter={toggleHoverState}
@@ -97,7 +122,7 @@ export default function RearEndEdit({ loss, handleEditClick }) {
                                                 </Select>
                                             </FormControl>
                                         </Grid>
-                                            {loss && loss.pushed ? (
+                                            {(carPosition === "middle" && numberOfCars === ">2") ? (
                                                 <Grid item xs={12} md={6}>
                                                     <FormControl className={classes.formControl} variant="filled">
                                                 <Typography ref={inputLabel}>Did you hit the car in front of you first or were you pushed?</Typography>
@@ -144,6 +169,7 @@ export default function RearEndEdit({ loss, handleEditClick }) {
                                     <Fab
                                         size="small"
                                         className={classes.fabEdit}
+                                        onClick={() => submitEdit()}
                                     >
                                         <PublishIcon />
                                     </Fab>

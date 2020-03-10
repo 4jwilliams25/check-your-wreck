@@ -1,5 +1,6 @@
 // TODO: Find a way to collapse the expansion panel when deleting a loss
 // TODO: Create a way to access the report from the loss Expansion Panel
+// TODO: make sure the edit forms have all the same conditional checks as the main accident form
 
 import React from 'react';
 

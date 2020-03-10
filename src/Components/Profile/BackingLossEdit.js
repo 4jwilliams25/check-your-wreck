@@ -14,6 +14,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PublishIcon from '@material-ui/icons/Publish';
 
+import { useDispatch } from 'react-redux';
+import { updateBacking } from '../../Store/backing/backingActions';
+
 const useStyles = makeStyles(theme => ({
     fabBack: {
         position: 'absolute',
@@ -67,6 +70,34 @@ export default function BackingLossEdit({ loss, handleEditClick }) {
     React.useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
+
+    const dispatch = useDispatch()
+
+    const submitEdit = () => {
+        let date = new Date();
+        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+
+        const updatedLoss = {
+            id: loss.id,
+            accident_type: "backing",
+                iv_action: ivAction,
+                cv_action: cvAction,
+                saw_other_car: sawOtherCar,
+                evasive_action: evasiveAction,
+                iv_stopped_or_moving: ivStoppedOrMoving,
+                cv_stopped_or_moving: cvStoppedOrMoving,
+                iv_distance_out: ivDistanceOut,
+                cv_distance_out: cvDistanceOut,
+                iv_poi: ivPoi,
+                cv_poi: cvPoi,
+                date_created: loss.date_created,
+                date_updated: currentDate
+        }
+    
+        dispatch(updateBacking(updatedLoss))
+
+        handleEditClick()
+    }
 
     return (
         <ExpansionPanelDetails
@@ -275,6 +306,7 @@ export default function BackingLossEdit({ loss, handleEditClick }) {
                                         color="secondary"
                                         size="small"
                                         className={classes.fabEdit}
+                                        onClick={() => submitEdit()}
                                     >
                                         <PublishIcon />
                                     </Fab>

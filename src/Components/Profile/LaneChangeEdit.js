@@ -14,6 +14,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PublishIcon from '@material-ui/icons/Publish';
 
+import { useDispatch } from 'react-redux';
+import { updateLaneChange } from '../../Store/laneChanges/laneChangeActions';
+
 const useStyles = makeStyles(theme => ({
     fabBack: {
         position: 'absolute',
@@ -63,6 +66,30 @@ export default function LaneChangeEdit({ loss, handleEditClick }) {
     React.useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
+
+    const dispatch = useDispatch()
+
+    const submitEdit = () => {
+        let date = new Date();
+        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+
+        const updatedLoss = {
+            id: loss.id,
+            accident_type: "laneChange",
+            iv_action: ivAction,
+            cv_action: cvAction,
+            saw_other_car: sawOtherCar,
+            evasive_action: evasiveAction,
+            iv_poi: ivPoi,
+            cv_poi: cvPoi,
+            date_created: loss.date_created,
+            date_updated: currentDate
+        }
+    
+        dispatch(updateLaneChange(updatedLoss))
+
+        handleEditClick()
+    }
 
     return (
         <ExpansionPanelDetails
@@ -208,6 +235,7 @@ export default function LaneChangeEdit({ loss, handleEditClick }) {
                                 color="secondary"
                                 size="small"
                                 className={classes.fabEdit}
+                                onClick={() => submitEdit()}
                             >
                                 <PublishIcon />
                             </Fab>

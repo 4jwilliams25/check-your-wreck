@@ -133,21 +133,21 @@ export const responses = {
         backingStopped +
         compNegFault
         ],
-    17: ["  You may be partially at fault.",
+    17: ["  You have some fault and are probably majority at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing,
         backingButEstablished +
         compNegFault
         ],
-    18: ["  You have some fault and are probably majority at fault.",
+    18: ["  You may be partially at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing,
         backingButEstablished +
         compNegFault
         ],
-    19: ["  ou're at fault.",
+    19: ["  You're at fault.",
         dutiesOwedBreached +
         rightOfWay +
         backing,
