@@ -38,7 +38,7 @@ export default function RearEndLoss({ loss }) {
                             </ExpansionPanelSummary>
                         </Paper>
                         {edit === false ? (
-                        <RearEndDisplay loss={loss} handleEditClick={handleEditClick} />
+                        <RearEndDisplay loss={loss} handleEditClick={handleEditClick}  />
                         ) : (
                         <RearEndEdit loss={loss} handleEditClick={handleEditClick} />
                         )

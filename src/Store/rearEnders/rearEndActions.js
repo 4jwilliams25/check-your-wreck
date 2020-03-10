@@ -79,7 +79,7 @@ export const removeRearEnd = id => dispatch => {
       type: REMOVE_REAREND_PENDING
     });
     axios
-      .delete(`http://localhost:8080/rearends/${id}`)
+      .delete(`http://localhost:8080/rearend/${id}`)
       .then(res => {
         dispatch({
           type: REMOVE_REAREND_SUCCESS,

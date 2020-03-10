@@ -13,6 +13,9 @@ import {
 import ClearIcon from '@material-ui/icons/Clear';
 import BuildIcon from '@material-ui/icons/Build';
 
+import { useDispatch } from 'react-redux';
+import { removeBacking } from '../../Store/backing/backingActions';
+
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%'
@@ -39,6 +42,7 @@ export default function BackingLossDisplay({ loss, handleEditClick }) {
     const classes = useStyles();
     const theme = useTheme();
     const [hover, setHover] = useState(true);
+    const dispatch = useDispatch();
 
     // const toggleHoverState = () => {
     //     setHover(!hover)
@@ -47,6 +51,10 @@ export default function BackingLossDisplay({ loss, handleEditClick }) {
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,
         exit: theme.transitions.duration.leavingScreen,
+    }
+
+    const handleRemove = id => {
+        dispatch(removeBacking(id))
     }
 
     return (
@@ -177,6 +185,7 @@ export default function BackingLossDisplay({ loss, handleEditClick }) {
                                         color="secondary"
                                         size="small"
                                         className={classes.fabDelete}
+                                        onClick={() => handleRemove(loss.id)}
                                     >
                                         <ClearIcon />
                                     </Fab>

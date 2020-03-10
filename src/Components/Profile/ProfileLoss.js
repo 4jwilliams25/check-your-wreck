@@ -1,9 +1,9 @@
+// TODO: Find a way to collapse the expansion panel when deleting a loss
 // TODO: Create a way to access the report from the loss Expansion Panel
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import RearEndLoss from './RearEndLoss';
-import RearEndEdit from './RearEndEdit';
 import LaneChangeLoss from './LaneChangeLoss';
 import BackingLoss from './BackingLoss';
 

@@ -13,6 +13,9 @@ import {
 import ClearIcon from '@material-ui/icons/Clear';
 import BuildIcon from '@material-ui/icons/Build';
 
+import { useDispatch } from 'react-redux';
+import { removeRearEnd } from '../../Store/rearEnders/rearEndActions';
+
 const useStyles = makeStyles(theme => ({
     fabDelete: {
         position: 'absolute',
@@ -31,6 +34,7 @@ export default function RearEndDisplay({ loss, handleEditClick }) {
     const classes = useStyles();
     const theme = useTheme();
     const [hover, setHover] = useState(true);
+    const dispatch = useDispatch();
 
     // const toggleHoverState = () => {
     //     setHover(!hover)
@@ -39,6 +43,10 @@ export default function RearEndDisplay({ loss, handleEditClick }) {
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,
         exit: theme.transitions.duration.leavingScreen,
+    }
+
+    const handleRemove = id => {
+        dispatch(removeRearEnd(id))
     }
 
     return (
@@ -109,6 +117,7 @@ export default function RearEndDisplay({ loss, handleEditClick }) {
                                         color="secondary"
                                         size="small"
                                         className={classes.fabDelete}
+                                        onClick={() => handleRemove(loss.id)}
                                     >
                                         <ClearIcon />
                                     </Fab>
