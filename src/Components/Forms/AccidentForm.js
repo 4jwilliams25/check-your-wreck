@@ -1,5 +1,16 @@
+// TODO: disable the submit button until all the fields are filled
+
 import React from "react";
-import { responses } from './AccidentCodes/CodeResponses';
+import { useHistory } from 'react-router-dom';
+
+import { 
+    makeStyles,
+    InputLabel, 
+    MenuItem, 
+    Button, 
+    FormControl, 
+    Select
+} from '@material-ui/core';
 
 // Component Imports
 import RearEndForm from './RearEndForm';
@@ -11,7 +22,25 @@ import rearEndFault from './FaultFunctions/rearEndFault';
 import laneChangeFault from './FaultFunctions/laneChangeFault';
 import backingFault from './FaultFunctions/backingFault';
 
-export default function AccidentForm() {
+// Post Request Imports
+import { useDispatch } from 'react-redux';
+import { addRearEnd } from '../../Store/rearEnders/rearEndActions';
+import { addLaneChange } from '../../Store/laneChanges/laneChangeActions';
+import { addBacking } from '../../Store/backing/backingActions';
+
+    // Form Styling
+    const useStyles = makeStyles(theme => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 300,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }))
+
+export default function AccidentForm(props) {
+    const classes = useStyles();
 
     // Form State
     const [accidentType, setAccidentType] = React.useState("");
@@ -22,7 +51,7 @@ export default function AccidentForm() {
     const [cvAction, setCvAction] = React.useState("");
     const [ivPoi, setIvPoi] = React.useState("");
     const [cvPoi, setCvPoi] = React.useState("");
-    const [accidentCode, setAccidentCode] = React.useState(0)
+    // const [accidentCode, setAccidentCode] = React.useState(0)
     // Rear End Accident State
     const [numberOfCars, setNumberOfCars] = React.useState("");
     const [carPosition, setCarPosition] = React.useState("");
@@ -88,24 +117,79 @@ export default function AccidentForm() {
         />
     )
 
+    let history = useHistory();
+    const dispatch = useDispatch();
+
     // Submit Handler
     const handleSubmit = e => {
         e.preventDefault();
+
+        let date = new Date();
+        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+
+        history.push('/report')
+
         if (accidentType === "rearEnd") {
-            setAccidentCode(rearEndFault(
+
+            const newLoss = {
+                accident_type: "rearEnd",
+                number_of_cars: numberOfCars,
+                car_position: carPosition,
+                pushed: pushed,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
+            props.setAccidentCode(rearEndFault(
                 numberOfCars,
                 carPosition,
-                pushed))
+                pushed));
+
+            dispatch(addRearEnd(newLoss));
+
         } else if (accidentType === "laneChange") {
-            setAccidentCode(laneChangeFault(
+
+            const newLoss = {
+                accident_type: "laneChange",
+                iv_action: ivAction,
+                cv_action: cvAction,
+                saw_other_car: sawOtherCar,
+                evasive_action: evasiveAction,
+                iv_poi: ivPoi,
+                cv_poi: cvPoi,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
+            props.setAccidentCode(laneChangeFault(
                 ivAction, 
                 cvAction, 
                 ivPoi, 
                 cvPoi, 
                 sawOtherCar, 
                 evasiveAction))
+
+            dispatch(addLaneChange(newLoss))
+
         } else if (accidentType === "backing") {
-            setAccidentCode(backingFault(
+
+            const newLoss = {
+                accident_type: "backing",
+                iv_action: ivAction,
+                cv_action: cvAction,
+                saw_other_car: sawOtherCar,
+                evasive_action: evasiveAction,
+                iv_stopped_or_moving: ivStoppedOrMoving,
+                cv_stopped_or_moving: cvStoppedOrMoving,
+                iv_distance_out: ivDistanceOut,
+                cv_distance_out: cvDistanceOut,
+                iv_poi: ivPoi,
+                cv_poi: cvPoi,
+                date_created: currentDate,
+                date_updated: currentDate
+            }
+
+            props.setAccidentCode(backingFault(
                 ivStoppedOrMoving,
                 cvStoppedOrMoving,
                 sawOtherCar,
@@ -117,30 +201,74 @@ export default function AccidentForm() {
                 cvPoi,
                 evasiveAction
             ))
+
+            dispatch(addBacking(newLoss))
+        }
+    }
+
+    const handleDisable = () => {
+        if (accidentType === "rearEnd" &&
+            numberOfCars &&
+            carPosition
+        ) {
+            return false
+        } else if (
+            accidentType === "laneChange" &&
+            ivAction &&
+            sawOtherCar &&
+            cvAction &&
+            ivPoi &&
+            cvPoi
+        ) {
+            return false
+        } else if (
+            accidentType === "backing" &&
+            ivAction &&
+            sawOtherCar &&
+            ivStoppedOrMoving &&
+            cvAction &&
+            cvStoppedOrMoving &&
+            ivPoi &&
+            cvPoi
+        ) {
+            return false
+        } else {
+            return true
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h4>Accident Form</h4>
-            <div>What kind of accident were you in?</div>
-            <select required onChange={e => setAccidentType(e.target.value)}>
-                <option value=""></option>
-                <option value="rearEnd">A rear end accident.</option>
-                <option value="laneChange">A lane change accident.</option>
-                <option value="backing">A backing accident.</option>
-            </select>
-            <br />
-            {accidentType === "rearEnd" ? rearEndFields : ''}
-            {accidentType === "laneChange" ? laneChangeFields : ''}
-            {accidentType === "backing" ? backingFields : ''}
-            <br />
-            <div>
-                <button>So who's fault is this?</button>
-            </div>
-            <br />
-            <h3>{accidentCode ? responses[accidentCode][0] : ''}</h3>
-            <h3>{accidentCode ? responses[accidentCode][1] : ''}</h3>
-        </form>
+        <div>
+            <FormControl className={classes.formControl}>
+                <InputLabel>What kind of accident were you in?</InputLabel>
+                <Select 
+                    required
+                    value={accidentType} 
+                    onChange={e => setAccidentType(e.target.value)}
+                >
+                    <MenuItem value=""></MenuItem>
+                    <MenuItem value="rearEnd">A rear end accident.</MenuItem>
+                    <MenuItem value="laneChange">A lane change accident.</MenuItem>
+                    <MenuItem value="backing">A backing accident.</MenuItem>
+                </Select>
+            </FormControl>
+                <br />
+                {accidentType === "rearEnd" ? rearEndFields : ''}
+                {accidentType === "laneChange" ? laneChangeFields : ''}
+                {accidentType === "backing" ? backingFields : ''}
+                <br />
+                <div>
+                    <Button 
+                        onClick={handleSubmit} 
+                        size="small"
+                        variant="outlined" 
+                        color="primary"
+                        disabled={handleDisable()}
+                    >
+                        So who's fault is this?
+                    </Button>
+                </div>
+            
+        </div>
     )
 }
