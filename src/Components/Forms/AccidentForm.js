@@ -41,11 +41,9 @@ import { addBacking } from '../../Store/backing/backingActions';
 
 export default function AccidentForm(props) {
     const classes = useStyles();
-    const inputLabel = React.useRef(null);
 
     // Form State
     const [accidentType, setAccidentType] = React.useState("");
-    const [disable, setDisable] = React.useState(true)
     // Shared State
     const [ivAction, setIvAction] = React.useState("");
     const [sawOtherCar, setSawOtherCar] = React.useState("");

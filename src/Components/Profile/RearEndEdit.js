@@ -118,7 +118,7 @@ export default function RearEndEdit({ loss, handleEditClick }) {
                                                 >
                                                     <MenuItem value="front">front</MenuItem>
                                                     <MenuItem value="back">back</MenuItem>
-                                                    {numberOfCars === ">2" ? <MenuItem value="middle">Somewhere in the middle</MenuItem> : ''}
+                                                    {numberOfCars === ">2" && <MenuItem value="middle">Somewhere in the middle</MenuItem>}
                                                 </Select>
                                             </FormControl>
                                         </Grid>
