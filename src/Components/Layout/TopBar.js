@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TopBar() {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
+    // const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -58,7 +58,7 @@ export default function TopBar() {
                         </IconButton>
                         <Menu
                             anchorEl={anchorEl}
-                            anchorOrgin={{
+                            anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'right',
                             }}

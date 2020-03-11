@@ -125,7 +125,7 @@ export default function AccidentForm(props) {
         e.preventDefault();
 
         let date = new Date();
-        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+        let currentDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
         history.push('/report')
 

@@ -71,7 +71,7 @@ export default function LaneChangeEdit({ loss, handleEditClick }) {
 
     const submitEdit = () => {
         let date = new Date();
-        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+        let currentDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
         const updatedLoss = {
             id: loss.id,

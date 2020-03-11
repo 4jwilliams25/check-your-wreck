@@ -35,7 +35,7 @@ export default function FAQ() {
                     </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Typography variant="subtitle2">
+                    <Typography>
                         {answers.outOfPocket}
                     </Typography>
                 </ExpansionPanelDetails>

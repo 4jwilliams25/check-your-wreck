@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     FormControl,
     Select,
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 export default function BackingLossEdit({ loss, handleEditClick }) {
     const classes = useStyles();
     const theme = useTheme();
-    const [hover, setHover] = useState(true);
+    const [hover, setHover] = React.useState(true);
     const [labelWidth, setLabelWidth] = React.useState(0);
     // Form State
     const [ivAction, setIvAction] = React.useState(loss.iv_action);
@@ -75,7 +75,7 @@ export default function BackingLossEdit({ loss, handleEditClick }) {
 
     const submitEdit = () => {
         let date = new Date();
-        let currentDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+        let currentDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
         const updatedLoss = {
             id: loss.id,
